@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29418.71
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroCross", "ZeroCross\ZeroCross.csproj", "{1268A5E5-E4D9-4F26-AD6B-E9B3BD8EE0CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1268A5E5-E4D9-4F26-AD6B-E9B3BD8EE0CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1268A5E5-E4D9-4F26-AD6B-E9B3BD8EE0CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1268A5E5-E4D9-4F26-AD6B-E9B3BD8EE0CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1268A5E5-E4D9-4F26-AD6B-E9B3BD8EE0CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {50FF1C25-5627-40FD-A557-CABA25E4104A}
+	EndGlobalSection
+EndGlobal
