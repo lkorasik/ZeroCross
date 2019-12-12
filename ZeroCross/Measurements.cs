@@ -3,7 +3,7 @@
     class Measurements
     {
         private static int windowSizeX = 55;
-        private static int windowSizeY = 12;
+        private static int windowSizeY = 13;
         private static int previewSizeX = windowSizeX;
         private static int previewSizeY = windowSizeY;
 

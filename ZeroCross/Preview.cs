@@ -27,6 +27,7 @@ namespace ZeroCross
 
             WriteAuthor();
 
+            Console.SetCursorPosition(0, 0);
             Console.ReadKey();
         }
 
@@ -41,7 +42,7 @@ namespace ZeroCross
             {
                 for (int y = 0; y < Measurements.GetPreviewSizeY(); y++)
                 {
-                    if (y >= 7) field[x, y] = ConsoleColor.Black;
+                    if (y >= 10) field[x, y] = ConsoleColor.Black;
                     else field[x, y] = ConsoleColor.Red;
                 }
             }
@@ -114,15 +115,15 @@ namespace ZeroCross
         {
             int size = 6;
 
-            InitLetterZ(ConsoleColor.Black, 1, 1);
-            InitLetterE(ConsoleColor.Black, size + 1, 1);
-            InitLetterR(ConsoleColor.Black, 2 * size + 1, 1);
-            InitLetterO(ConsoleColor.Black, 3 * size + 1, 1);
-            InitLetterC(ConsoleColor.Black, 4 * size + 1, 1);
-            InitLetterR(ConsoleColor.Black, 5 * size + 1, 1);
-            InitLetterO(ConsoleColor.Black, 6 * size + 1, 1);
-            InitLetterS(ConsoleColor.Black, 7 * size + 1, 1);
-            InitLetterS(ConsoleColor.Black, 8 * size + 1, 1);
+            InitLetterZ(ConsoleColor.Black, 1, 2);
+            InitLetterE(ConsoleColor.Black, size + 1, 2);
+            InitLetterR(ConsoleColor.Black, 2 * size + 1, 2);
+            InitLetterO(ConsoleColor.Black, 3 * size + 1, 2);
+            InitLetterC(ConsoleColor.Black, 4 * size + 1, 3);
+            InitLetterR(ConsoleColor.Black, 5 * size + 1, 3);
+            InitLetterO(ConsoleColor.Black, 6 * size + 1, 3);
+            InitLetterS(ConsoleColor.Black, 7 * size + 1, 3);
+            InitLetterS(ConsoleColor.Black, 8 * size + 1, 3);
         }
 
         /*

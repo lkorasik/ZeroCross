@@ -111,18 +111,7 @@ namespace ZeroCross
          */
         private static (int x, int y) GetComputerStep()
         {
-            (int x, int y) coordStep = (-1, -1);
-            var rnd = new Random();
-
-            while (true)
-            {
-                var step = rnd.Next(0, 8);
-                coordStep = ConvertStep(step);
-
-                if (step < 0 || step > 8 || !Table.IsCellEmpty(coordStep.x, coordStep.y)) continue;
-
-                return coordStep;
-            }
+            return PlayerBot.MakeStep();
         }
 
         /*

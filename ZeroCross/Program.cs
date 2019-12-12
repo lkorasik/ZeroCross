@@ -7,6 +7,7 @@ namespace ZeroCross
         static void Main(string[] args)
         {
             IsConsoleCursorVisible();
+            Music.InitMusic();
             Preview.InitPreview();
             Menu.InitMenu();
 

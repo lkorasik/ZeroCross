@@ -33,7 +33,7 @@ namespace ZeroCross
         {
             var max = GetMaxStringLength();
 
-            startX = (Measurements.GetWindowSizeX() / 2) - (max / 2);
+            startX = (Measurements.GetWindowSizeX() / 2) - (max / 2) + 1;
             startY = (Measurements.GetWindowSizeY() / 2) - (length / 2);
         }
 
