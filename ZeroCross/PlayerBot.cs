@@ -23,7 +23,7 @@ namespace ZeroCross
 
                 if (Table.IsCellEmpty(turn.x, turn.y)) break;
             }
-
+            
             return turn;
         }
 
