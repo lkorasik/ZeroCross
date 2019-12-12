@@ -4,7 +4,7 @@ namespace ZeroCross
 {
     class Game
     {
-        private static bool isUsersStep = false;
+        private static PlayersCodes isUsersStep = PlayersCodes.NULL;
 
         /*
          * Метод, где происходит сам процесс игры
@@ -19,15 +19,15 @@ namespace ZeroCross
             Table.WriteTable();
             (int x, int y) stepCoordinates = (-1, -1);
 
-            bool? winner = CheckWinLine();
+            PlayersCodes winner = CheckWinLine();
 
-            while ((winner == null) && HaveEmptyField())
+            while ((winner == PlayersCodes.NULL) && HaveEmptyField())
             {
                 var isContinue = CheckWinLine();
-                if (isContinue == null) ChangeStep();
+                if (isContinue == PlayersCodes.NULL) ChangeStep();
                 else break;
 
-                if (isUsersStep)
+                if (isUsersStep == PlayersCodes.PLAYER)
                     stepCoordinates = GetUserStep();
                 else
                     stepCoordinates = GetComputerStep();
@@ -45,11 +45,11 @@ namespace ZeroCross
         /*
          * Метод завершения игры
          */
-        private static void FinishGame(bool? winner)
+        private static void FinishGame(PlayersCodes winner)
         {
             var phrase = " win!!! Press enter for continue...";
-            if (winner == true) phrase = "User" + phrase;
-            else if (winner == false) phrase = "Computer" + phrase;
+            if (winner == PlayersCodes.PLAYER) phrase = "User" + phrase;
+            else if (winner == PlayersCodes.BOT) phrase = "Computer" + phrase;
             else phrase = "Nobody wins!!! Press enter for continue...";
 
             Console.SetCursorPosition((Measurements.GetWindowSizeX() / 2 - phrase.Length / 2), (Measurements.GetWindowSizeY() - 1));
@@ -63,7 +63,11 @@ namespace ZeroCross
          */
         private static void ChangeStep()
         {
-            isUsersStep = !isUsersStep;
+            switch (isUsersStep)
+            {
+                case PlayersCodes.PLAYER: isUsersStep = PlayersCodes.BOT; break;
+                case PlayersCodes.BOT: isUsersStep = PlayersCodes.PLAYER; break;
+            }
         }
 
         /*
@@ -140,9 +144,11 @@ namespace ZeroCross
         /*
          * Проверить наличие выйгрышных линий
          */
-        private static bool? CheckWinLine()
+        private static PlayersCodes CheckWinLine()
         {
-            return Table.CheckWinLines();
+            if (Table.CheckWinLines() == PlayersCodes.PLAYER) return PlayersCodes.PLAYER;
+            else if (Table.CheckWinLines() == PlayersCodes.BOT) return PlayersCodes.BOT;
+            else return PlayersCodes.NULL;
         }
 
         /*

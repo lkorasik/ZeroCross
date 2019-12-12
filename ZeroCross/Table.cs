@@ -10,10 +10,7 @@ namespace ZeroCross
         //NOTE: tableSizeX == tableSizeY
         private static int tableSizeX = (sizeX - 1) * 4 + 3;
         private static int tableSizeY = (sizeY - 1) * 4 + 3;
-        //null - empty
-        //true - Player
-        //false - Computer
-        public static bool?[,] field = new bool?[sizeX, sizeY];
+        public static PlayersCodes[,] field = new PlayersCodes[sizeX, sizeY];
         public static char[,] fielsChar = new char[sizeX, sizeY];
 
         /*
@@ -25,7 +22,7 @@ namespace ZeroCross
             {
                 for (int x = 0; x < sizeX; x++)
                 {
-                    field[x, y] = null;
+                    field[x, y] = PlayersCodes.NULL;
                 }
             }
         }
@@ -33,9 +30,9 @@ namespace ZeroCross
         /*
          * Заполнение поля в соответствии с ходами
          */
-        public static bool InsertValue(int x, int y, bool isUser)
+        public static bool InsertValue(int x, int y, PlayersCodes isUser)
         {
-            if (field[x, y] != null) return false;
+            if (field[x, y] != PlayersCodes.NULL) return false;
             else field[x, y] = isUser;
             return true;
         }
@@ -46,7 +43,7 @@ namespace ZeroCross
         public static bool IsCellEmpty(int x, int y)
         {
             if (x < 0 || x > 8 || y < 0 || y > 8) return false;
-            return field[x, y] == null;
+            return field[x, y] == PlayersCodes.NULL;
         }
 
         /*
@@ -59,7 +56,7 @@ namespace ZeroCross
             //var startY = (Measurements.windowSizeY / 2) - (tableSizeY / 2);
             var startY = 0;
 
-            ConvertFromBoolToChar();
+            ConvertFromPlayerCodesToChar();
 
             Console.SetCursorPosition(startX, startY);
             Console.Write("   |   |   ");
@@ -88,15 +85,15 @@ namespace ZeroCross
         /*
          * Конвертация значений ячеек поля в Вывод на экран
          */
-        private static void ConvertFromBoolToChar()
+        private static void ConvertFromPlayerCodesToChar()
         {
             for (int y = 0; y < sizeY; y++)
             {
                 for (int x = 0; x < sizeX; x++)
                 {
-                    if (field[x, y] == true) fielsChar[x, y] = 'X';
-                    if (field[x, y] == false) fielsChar[x, y] = 'O';
-                    if (field[x, y] == null) fielsChar[x, y] = ' ';
+                    if (field[x, y] == PlayersCodes.PLAYER) fielsChar[x, y] = 'X';
+                    if (field[x, y] == PlayersCodes.BOT) fielsChar[x, y] = 'O';
+                    if (field[x, y] == PlayersCodes.NULL) fielsChar[x, y] = ' ';
                 }
             }
         }
@@ -121,34 +118,37 @@ namespace ZeroCross
         /*
          * Проверяем на то, что кто-то выйграл
          */
-        public static bool? CheckWinLines()
+        public static PlayersCodes CheckWinLines()
         {
-            if ((field[0, 0] == true) && (field[1, 0] == true) && (field[2, 0] == true)) return true;
-            if ((field[0, 1] == true) && (field[1, 1] == true) && (field[2, 1] == true)) return true;
-            if ((field[0, 2] == true) && (field[1, 2] == true) && (field[2, 2] == true)) return true;
+            var player = PlayersCodes.PLAYER;
+            var bot = PlayersCodes.BOT;
 
-            if ((field[0, 0] == true) && (field[0, 1] == true) && (field[0, 2] == true)) return true;
-            if ((field[1, 0] == true) && (field[1, 1] == true) && (field[1, 2] == true)) return true;
-            if ((field[2, 0] == true) && (field[2, 1] == true) && (field[2, 2] == true)) return true;
+            if ((field[0, 0] == player) && (field[1, 0] == player) && (field[2, 0] == player)) return player;
+            if ((field[0, 1] == player) && (field[1, 1] == player) && (field[2, 1] == player)) return player;
+            if ((field[0, 2] == player) && (field[1, 2] == player) && (field[2, 2] == player)) return player;
 
-            if ((field[0, 0] == true) && (field[1, 1] == true) && (field[2, 2] == true)) return true;
+            if ((field[0, 0] == player) && (field[0, 1] == player) && (field[0, 2] == player)) return player;
+            if ((field[1, 0] == player) && (field[1, 1] == player) && (field[1, 2] == player)) return player;
+            if ((field[2, 0] == player) && (field[2, 1] == player) && (field[2, 2] == player)) return player;
 
-            if ((field[2, 0] == true) && (field[1, 1] == true) && (field[0, 2] == true)) return true;
+            if ((field[0, 0] == player) && (field[1, 1] == player) && (field[2, 2] == player)) return player;
+
+            if ((field[2, 0] == player) && (field[1, 1] == player) && (field[0, 2] == player)) return player;
 
 
-            if ((field[0, 0] == false) && (field[1, 0] == false) && (field[2, 0] == false)) return false;
-            if ((field[0, 1] == false) && (field[1, 1] == false) && (field[2, 1] == false)) return false;
-            if ((field[0, 2] == false) && (field[1, 2] == false) && (field[2, 2] == false)) return false;
+            if ((field[0, 0] == bot) && (field[1, 0] == bot) && (field[2, 0] == bot)) return bot;
+            if ((field[0, 1] == bot) && (field[1, 1] == bot) && (field[2, 1] == bot)) return bot;
+            if ((field[0, 2] == bot) && (field[1, 2] == bot) && (field[2, 2] == bot)) return bot;
 
-            if ((field[0, 0] == false) && (field[0, 1] == false) && (field[0, 2] == false)) return false;
-            if ((field[1, 0] == false) && (field[1, 1] == false) && (field[1, 2] == false)) return false;
-            if ((field[2, 0] == false) && (field[2, 1] == false) && (field[2, 2] == false)) return false;
+            if ((field[0, 0] == bot) && (field[0, 1] == bot) && (field[0, 2] == bot)) return bot;
+            if ((field[1, 0] == bot) && (field[1, 1] == bot) && (field[1, 2] == bot)) return bot;
+            if ((field[2, 0] == bot) && (field[2, 1] == bot) && (field[2, 2] == bot)) return bot;
 
-            if ((field[0, 0] == false) && (field[1, 1] == false) && (field[2, 2] == false)) return false;
+            if ((field[0, 0] == bot) && (field[1, 1] == bot) && (field[2, 2] == bot)) return bot;
+            
+            if ((field[2, 0] == bot) && (field[1, 1] == bot) && (field[0, 2] == bot)) return bot;
 
-            if ((field[2, 0] == false) && (field[1, 1] == false) && (field[0, 2] == false)) return false;
-
-            return null;
+            return PlayersCodes.NULL;
         }
 
         /*
@@ -160,7 +160,7 @@ namespace ZeroCross
             {
                 for (int x = 0; x < field.GetLength(1); x++)
                 {
-                    if (field[x, y] == null) return true;
+                    if (field[x, y] == PlayersCodes.NULL) return true;
                 }
             }
 
