@@ -9,7 +9,7 @@ namespace ZeroCross
         /*
          * Метод, где происходит сам процесс игры
          */
-        public static void StartGame()
+        public static void StartGame(GameMode mode)
         {
             Console.Clear();
 
@@ -27,10 +27,7 @@ namespace ZeroCross
                 if (isContinue == PlayersCodes.NULL) ChangeStep();
                 else break;
 
-                if (isUsersStep == PlayersCodes.PLAYER)
-                    stepCoordinates = GetUserStep();
-                else
-                    stepCoordinates = GetComputerStep();
+                stepCoordinates = MakeSteps(stepCoordinates, mode);
 
                 //stepCoordinates = ConvertStep(step);
                 Table.InsertValue(stepCoordinates.x, stepCoordinates.y, isUsersStep);
@@ -40,6 +37,22 @@ namespace ZeroCross
             }
 
             FinishGame(winner);
+        }
+
+        private static (int x, int y) MakeSteps((int x, int y) stepCoordinates, GameMode mode) {
+            if (isUsersStep == PlayersCodes.PLAYER)
+            {
+                stepCoordinates = GetUserStep();
+            }
+            else
+            {
+                if (mode == GameMode.PLAYER_VS_COMPUTER)
+                    stepCoordinates = GetComputerStep();
+                else
+                    stepCoordinates = GetUserStep();
+            }
+
+            return stepCoordinates;
         }
 
         /*
@@ -67,6 +80,7 @@ namespace ZeroCross
             {
                 case PlayersCodes.PLAYER: isUsersStep = PlayersCodes.BOT; break;
                 case PlayersCodes.BOT: isUsersStep = PlayersCodes.PLAYER; break;
+                case PlayersCodes.NULL: isUsersStep = PlayersCodes.PLAYER; break;
             }
         }
 
@@ -86,7 +100,7 @@ namespace ZeroCross
                 Console.SetCursorPosition(curPosX, curPosY);
                 coordStep = ConvertStep(step);
 
-                if (step < 0 || step > 8 || !Table.IsCellEmpty(coordStep.x, coordStep.y)) continue;
+                if (step < 1 || step > 9 || !Table.IsCellEmpty(coordStep.x, coordStep.y)) continue;
 
                 return coordStep;
             }
@@ -127,15 +141,15 @@ namespace ZeroCross
 
             switch (step)
             {
-                case 0: stepCoordinates = (0, 0); break;
-                case 1: stepCoordinates = (1, 0); break;
-                case 2: stepCoordinates = (2, 0); break;
-                case 3: stepCoordinates = (0, 1); break;
-                case 4: stepCoordinates = (1, 1); break;
-                case 5: stepCoordinates = (2, 1); break;
-                case 6: stepCoordinates = (0, 2); break;
-                case 7: stepCoordinates = (1, 2); break;
-                case 8: stepCoordinates = (2, 2); break;
+                case 1: stepCoordinates = (0, 2); break;
+                case 2: stepCoordinates = (1, 2); break;
+                case 3: stepCoordinates = (2, 2); break;
+                case 4: stepCoordinates = (0, 1); break;
+                case 5: stepCoordinates = (1, 1); break;
+                case 6: stepCoordinates = (2, 1); break;
+                case 7: stepCoordinates = (0, 0); break;
+                case 8: stepCoordinates = (1, 0); break;
+                case 9: stepCoordinates = (2, 0); break;
             }
 
             return stepCoordinates;

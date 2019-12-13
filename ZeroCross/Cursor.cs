@@ -15,9 +15,9 @@ namespace ZeroCross
         /*
          * Инициализация курсора
          */
-        public static void InitCursor()
+        public static void InitCursor(bool isAfterGame = false)
         {
-            InitParams();
+            InitParams(isAfterGame);
 
             InitCoordinatesMenuItems();
 
@@ -31,11 +31,20 @@ namespace ZeroCross
         /*
          * вытаскивание необходимых координат из класса Menu
          */
-        private static void InitParams()
+        private static void InitParams(bool isAfterGame)
         {
-            length = Menu.GetLength();
-            startX = Menu.GetStartPositionX();
-            startY = Menu.GetStartPositionY();
+            if (!isAfterGame)
+            {
+                length = Menu.GetLength();
+                startX = Menu.GetStartPositionX();
+                startY = Menu.GetStartPositionY();
+            }
+            else
+            {
+                length = ManuAfterGame.GetLength();
+                startX = ManuAfterGame.GetStartPositionX();
+                startY = ManuAfterGame.GetStartPositionY();
+            }
         }
 
         /*
@@ -126,10 +135,17 @@ namespace ZeroCross
         /*
          * Возвращает решение игрока
          */
-        public static Decision ReturnDecision()
+        public static MenuDecision ReturnMainMenuDecision()
         {
-            if (temperPosition.y == startY) return Decision.NEW_GAME;
-            else return Decision.EXIT;
+            if (temperPosition.y == startY) return MenuDecision.PLAYER_VS_COMPUTER;
+            if (temperPosition.y == startY + 1) return MenuDecision.PLAYER_VS_PLAYER;
+            else return MenuDecision.EXIT;
+        }
+
+        public static AfterGameDesicion ReturnAfterGameDecision()
+        {
+            if (temperPosition.y == startY) return AfterGameDesicion.CONTINUE;
+            return AfterGameDesicion.EXIT;
         }
     }
 }

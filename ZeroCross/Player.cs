@@ -1,7 +1,0 @@
-﻿namespace ZeroCross
-{
-    class Player
-    {
-
-    }
-}

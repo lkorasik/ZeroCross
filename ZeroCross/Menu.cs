@@ -44,8 +44,9 @@ namespace ZeroCross
         {
             menuItems = new string[]
             {
-                "1) New Game",
-                "2) Exit"
+                "1) User VS Computer",
+                "2) User VS User (local)",
+                "3) Exit"
             };
 
             length = menuItems.Length;

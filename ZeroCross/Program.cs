@@ -11,19 +11,24 @@ namespace ZeroCross
             Preview.InitPreview();
             Menu.InitMenu();
 
+            Cursor.InitCursor();
+            var decision = Cursor.ReturnMainMenuDecision();
+
+            if (decision == MenuDecision.EXIT) Exit();
+
             while (true)
             {
-                Cursor.InitCursor();
-                var decision = Cursor.ReturnDecision();
+                ShowCoordinatesOfCells.WriteTable();
 
-                if (decision == Decision.EXIT) break;
-                if (decision == Decision.NEW_GAME)
-                {
-                    ShowCoordinatesOfCells.WriteTable();
-                    Game.StartGame();
-                }
+                if (decision == MenuDecision.PLAYER_VS_PLAYER)
+                    Game.StartGame(GameMode.PLAYER_VS_PLAYER);
+                else if (decision == MenuDecision.PLAYER_VS_COMPUTER)
+                    Game.StartGame(GameMode.PLAYER_VS_COMPUTER);
 
                 ManuAfterGame.InitMenu();
+                Cursor.InitCursor(true);
+                var decision0 = Cursor.ReturnAfterGameDecision();
+                if (decision0 == AfterGameDesicion.EXIT) break;
             }
 
             Exit();

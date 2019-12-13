@@ -17,7 +17,7 @@ namespace ZeroCross
             Console.SetCursorPosition(startX, startY);
             Console.Write("   |   |   ");
             Console.SetCursorPosition(startX, startY + 1);
-            Console.Write(" 0 | 1 | 2 ");
+            Console.Write(" 7 | 8 | 9 ");
             Console.SetCursorPosition(startX, startY + 2);
             Console.Write("   |   |   ");
             Console.SetCursorPosition(startX, startY + 3);
@@ -25,7 +25,7 @@ namespace ZeroCross
             Console.SetCursorPosition(startX, startY + 4);
             Console.Write("   |   |   ");
             Console.SetCursorPosition(startX, startY + 5);
-            Console.Write(" 3 | 4 | 5 ");
+            Console.Write(" 4 | 5 | 6 ");
             Console.SetCursorPosition(startX, startY + 6);
             Console.Write("   |   |   ");
             Console.SetCursorPosition(startX, startY + 7);
@@ -33,7 +33,7 @@ namespace ZeroCross
             Console.SetCursorPosition(startX, startY + 8);
             Console.Write("   |   |   ");
             Console.SetCursorPosition(startX, startY + 9);
-            Console.Write(" 6 | 7 | 8 ");
+            Console.Write(" 1 | 2 | 3 ");
             Console.SetCursorPosition(startX, startY + 10);
             Console.Write("   |   |   ");
             WriteSuggestionToContinue();
