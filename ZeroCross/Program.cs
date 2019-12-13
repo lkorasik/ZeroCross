@@ -16,6 +16,11 @@ namespace ZeroCross
 
             if (decision == MenuDecision.EXIT) Exit();
 
+            if (decision == MenuDecision.PLAYER_VS_PLAYER)
+                ShowWhoseStep.WritePlayersName(true);
+            else
+                ShowWhoseStep.WritePlayersName(false);
+
             while (true)
             {
                 ShowCoordinatesOfCells.WriteTable();

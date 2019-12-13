@@ -15,7 +15,7 @@ namespace ZeroCross
 
             ShowCoordinatesOfCells.WriteTable();
 
-            Table.InitField();
+            Table.InitField(mode);
             Table.WriteTable();
             (int x, int y) stepCoordinates = (-1, -1);
 

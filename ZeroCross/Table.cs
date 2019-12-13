@@ -12,11 +12,12 @@ namespace ZeroCross
         private static int tableSizeY = (sizeY - 1) * 4 + 3;
         public static PlayersCodes[,] field = new PlayersCodes[sizeX, sizeY];
         public static char[,] fielsChar = new char[sizeX, sizeY];
+        private static bool isMultiplayer = false;
 
         /*
          * Заполнение поля пустыми значениями
          */
-        public static void InitField()
+        public static void InitField(GameMode isMultiplayer)
         {
             for (int y = 0; y < sizeY; y++)
             {
@@ -25,6 +26,11 @@ namespace ZeroCross
                     field[x, y] = PlayersCodes.NULL;
                 }
             }
+
+            if (isMultiplayer == GameMode.PLAYER_VS_PLAYER)
+                Table.isMultiplayer = true;
+            else
+                Table.isMultiplayer = false;
         }
 
         /*
@@ -80,6 +86,8 @@ namespace ZeroCross
             Console.Write(" " + fielsChar[0, 2] + " | " + fielsChar[1, 2] + " | " + fielsChar[2, 2] + " ");
             Console.SetCursorPosition(startX, startY + 10);
             Console.Write("   |   |   ");
+
+            ShowWhoseStep.WritePlayersName(isMultiplayer);
         }
 
         /*
