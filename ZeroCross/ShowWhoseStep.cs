@@ -11,7 +11,7 @@ namespace ZeroCross
 
         public static void WritePlayersName(bool isMultiplayer)
         {
-            Console.SetCursorPosition(Measurements.GetPreviewSizeX() - 1 - player.Length, 1);
+            Console.SetCursorPosition(Measurements.GetWindowSizeX() - 1 - player.Length, 1);
             Console.Write(player);
             
             if (isMultiplayer)
@@ -24,6 +24,8 @@ namespace ZeroCross
                 Console.SetCursorPosition(1, 1);
                 Console.Write(computer);
             }
+
+            Console.SetCursorPosition(Measurements.GetWindowSizeX() / 2, Measurements.GetWindowSizeY() - 2);
         }
     }
 }
